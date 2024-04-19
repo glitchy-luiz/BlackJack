@@ -1,0 +1,28 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+#cartas-dealer img{
+    height: 175px;
+    width: 125px;
+    margin: 1px;
+}
+
+#cartas-jogador img{
+    height: 175px;
+    width: 125px;
+    margin: 1px;
+}
+
+#aumentar {
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}
+
+#ficar{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}
