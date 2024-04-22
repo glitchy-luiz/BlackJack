@@ -11,12 +11,14 @@ var deck
 
 var podeAumentar = true
 
+//executa essas funções ao carregar a página
 window.onload = function(){
     buildDeck();
     embaralharDeck();
     iniciarJogo();
 }
 
+// criar uma array do deck de cartas de todos os naipes com cada valor
 function buildDeck(){
     let valores = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', ]
     let naipes = ['C', 'D', 'H', 'S']
@@ -68,9 +70,11 @@ function iniciarJogo(){
 
     document.getElementById('aumentar').addEventListener('click', aumentar)
     document.getElementById('ficar').addEventListener('click', ficar)
+    document.getElementById('reiniciar').addEventListener('click',reiniciar)
 
 }
 
+//faz com que uma carta seja retirada do deck total de cartas, e atribui o valor da carta retirada para a mão do jogador
 function aumentar(){
     if (!podeAumentar){
         return;
@@ -89,6 +93,7 @@ function aumentar(){
 
 }
 
+// revela a carta escondida do dealer e faz as verificaçõees de vitória e derrota
 function ficar(){
     maoDealer = reduceAce(maoDealer, DealerAceCount)
     maoJogador = reduceAce(maoJogador, JogadorAceCount)
@@ -117,6 +122,11 @@ function ficar(){
     document.getElementById('mao-jogador').innerText = maoJogador
     document.getElementById('resultado').innerText = mensagem
 }
+
+//reinicia a página
+function reiniciar(){
+    window.location.reload();
+} 
 
 // isso é um pouco complicado. O nome dos arquivos das cartas é por exemplo '4-C', e o split faz com que o valor que data armazena seja dividido por exemplo ['4', 'C']
 function getValue(carta){
