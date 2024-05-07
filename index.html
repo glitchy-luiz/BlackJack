@@ -7,6 +7,8 @@
     <title>BlackJack</title>
 </head>
 <body>
+    <h2 class="fichas">Fichas: <span id="fichas"></span></h2>
+
     <h2>Dealer: <span id="mao-dealer"></span></h2>
     <div id="cartas-dealer">
         <img id="hidden" src="./cartas/BACK.png" alt="">
@@ -18,8 +20,11 @@
     <br>
     <button id="aumentar">Aumentar</button>
     <button id="ficar">Ficar</button>
+    <button id="apostar">Apostar</button>
+    <input style="display:none;" type="range" min="1" max="100" value="1" id="rangeaposta">
+    <p id="valoraposta" style="display:none;"></p>
     <p id="resultado"></p>
-    <button id="reiniciar">Reiniciar</button>
+    <button id="reiniciar" style="display:none;">Reiniciar</button>
     <script src="script.js"></script>
 </body>
 </html>

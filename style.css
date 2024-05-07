@@ -28,6 +28,12 @@ body{
     font-size: 20px;
 }
 
+#apostar{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}
+
 button{
     border-radius: 10px;
     border-style: none;
@@ -43,3 +49,15 @@ p{
     height: 50px;
     font-size: 20px;
 }
+
+.fichas{
+    text-align: left;
+}
+
+/* #rangeaposta{
+    display: flex;
+    flex-direction: column;
+    margin-left: 45%;
+    margin-top: 8px;
+    display: none;
+} */

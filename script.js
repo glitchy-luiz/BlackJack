@@ -1,18 +1,41 @@
 // lembrete: As imagems estão em inglês, portanto os naipes são. C = Paus, D = Ouros, H = Copas, S = Espadas
 
+var pontos = 100;
+document.getElementById('fichas').innerText = pontos
+
+var btnreiniciar =  document.getElementById('reiniciar')
+
 var maoDealer = 0;
 var maoJogador = 0;
 
 var DealerAceCount = 0;
 var JogadorAceCount = 0;
 
+var cartasdealer = document.getElementById('cartas-dealer')
+var cartasjogador = document.getElementById('cartas-jogador')
+
+var rangeAposta = document.getElementById('rangeaposta')
+var valorAposta = document.getElementById('valoraposta')
+valorAposta.innerText = rangeAposta.value
+rangeAposta.max = pontos
+
 var hidden
 var deck
 
 var podeAumentar = true
+var podeFicar = true
+var podeApostar = true
 
 //executa essas funções ao carregar a página
-window.onload = function(){
+window.onload = function iniciar(){
+    maoDealer = 0;
+    maoJogador = 0;
+
+    DealerAceCount = 0;
+    JogadorAceCount = 0;
+
+    hidden
+    deck
     buildDeck();
     embaralharDeck();
     iniciarJogo();
@@ -70,6 +93,7 @@ function iniciarJogo(){
 
     document.getElementById('aumentar').addEventListener('click', aumentar)
     document.getElementById('ficar').addEventListener('click', ficar)
+    document.getElementById('apostar').addEventListener('click', apostar)
     document.getElementById('reiniciar').addEventListener('click',reiniciar)
 
 }
@@ -89,33 +113,57 @@ function aumentar(){
 
     if (reduceAce(maoJogador, JogadorAceCount) > 21){
         podeAumentar = false
+        podeApostar = false
+        rangeAposta.disabled = true
     }
 
 }
 
 // revela a carta escondida do dealer e faz as verificaçõees de vitória e derrota
 function ficar(){
+    if (!podeFicar){
+        return;
+    }
     maoDealer = reduceAce(maoDealer, DealerAceCount)
     maoJogador = reduceAce(maoJogador, JogadorAceCount)
+
+    btnreiniciar.style.display = 'inline'
 
     podeAumentar = false
     document.getElementById('hidden').src = './cartas/' + hidden + '.png';
 
+    var numeroAposta = parseInt(rangeAposta.value)
+
     let mensagem = ''
     if (maoJogador > 21){
         mensagem = 'Você perdeu!'
+        pontos -= numeroAposta
+        document.getElementById('fichas').innerText = pontos
+        podeFicar = false
+        rangeAposta.value = 1
     }
     else if (maoDealer > 21){
         mensagem = 'Você ganhou!'
+        pontos += numeroAposta
+        document.getElementById('fichas').innerText = pontos
+        podeFicar = false
     }
     else if (maoJogador == maoDealer){
         mensagem = 'Empate'
+        podeFicar = false
     }
     else if (maoJogador > maoDealer){
         mensagem = 'Você ganhou!'
+        pontos += numeroAposta
+        document.getElementById('fichas').innerText = pontos
+        podeFicar = false
     }
     else if (maoJogador < maoDealer){
         mensagem = 'Você perdeu!'
+        pontos -= numeroAposta
+        document.getElementById('fichas').innerText = pontos
+        podeFicar = false
+        rangeAposta.value = 1
     }
 
     document.getElementById('mao-dealer').innerText = maoDealer
@@ -125,7 +173,38 @@ function ficar(){
 
 //reinicia a página
 function reiniciar(){
-    window.location.reload();
+    // window.location.reload();
+    document.getElementById('hidden').src = "./cartas/BACK.png";
+    btnreiniciar.style.display = 'none'
+    document.getElementById('resultado').innerText = ''
+
+    podeAumentar = true
+    podeFicar = true
+    podeApostar = true
+    rangeAposta.disabled = false
+
+    while (cartasdealer.children.length > 1) {
+        cartasdealer.removeChild(cartasdealer.lastChild);
+      }
+
+    while (cartasjogador.firstChild) {
+        cartasjogador.removeChild(cartasjogador.firstChild);
+      }
+
+    maoDealer = 0;
+    maoJogador = 0;
+    document.getElementById('mao-dealer').innerText = maoDealer
+    document.getElementById('mao-jogador').innerText = maoJogador
+
+    DealerAceCount = 0;
+    JogadorAceCount = 0;
+
+    hidden
+    deck
+
+    buildDeck();
+    embaralharDeck();
+    iniciarJogo();
 } 
 
 // isso é um pouco complicado. O nome dos arquivos das cartas é por exemplo '4-C', e o split faz com que o valor que data armazena seja dividido por exemplo ['4', 'C']
@@ -167,4 +246,22 @@ function reduceAce(maoJogador, JogadorAceCount){
     }
     return maoJogador
 
+}
+
+rangeAposta.oninput = function() {
+    valorAposta.innerText = this.value;
+    rangeAposta.max = pontos
+  }
+
+function apostar(){
+    if (!podeApostar){
+        return;
+    }
+    if (rangeAposta.style.display === 'none'){
+        rangeAposta.style.display = 'inline'
+        valorAposta.style.display = 'inline'
+    } else{
+        rangeAposta.style.display = 'none'
+        valorAposta.style.display = 'none'
+    }
 }
