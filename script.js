@@ -1,6 +1,6 @@
 // lembrete: As imagems estão em inglês, portanto os naipes são. C = Paus, D = Ouros, H = Copas, S = Espadas
 
-var pontos = 10000;
+var pontos = 100;
 document.getElementById('fichas').innerText = pontos
 
 var btnreiniciar =  document.getElementById('reiniciar')
