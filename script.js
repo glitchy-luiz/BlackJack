@@ -424,5 +424,6 @@ function usarExtra(){
     document.getElementById('usarpontoextra').disabled = true
     if(pontoextras <= 0){
         document.getElementById('itempontoextra').style.display = 'none'
+        extra = false
     }
 }
