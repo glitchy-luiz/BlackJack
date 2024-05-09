@@ -1,6 +1,6 @@
 // lembrete: As imagems estão em inglês, portanto os naipes são. C = Paus, D = Ouros, H = Copas, S = Espadas
 
-var pontos = 100;
+var pontos = 10000;
 document.getElementById('fichas').innerText = pontos
 
 var btnreiniciar =  document.getElementById('reiniciar')
@@ -27,9 +27,14 @@ var deck
 
 var corfundo = false
 var corbotao = false
+var premio = false
+var vida = false
 
-var podeAumentar = true
-var podeFicar = true
+document.getElementById('ficar').disabled = true
+document.getElementById('aumentar').disabled = true
+
+var podeAumentar = false
+var podeFicar = false
 var podeApostar = true
 
 //executa essas funções ao carregar a página
@@ -173,8 +178,15 @@ function ficar(){
     }
 
     if (pontos <= 0){
-        alert('Derrota')
-        window.location.reload();
+        if (vida){
+            alert('Você perdeu seus pontos, mas usou sua segunda vida para continuar! Você perdeu metade dos seus pontos')
+            pontos = numeroAposta/2
+            document.getElementById('fichas').innerText = pontos
+            vida = false
+        } else{    
+            alert('Derrota')
+            window.location.reload();
+        }
     }
 
     document.getElementById('mao-dealer').innerText = maoDealer
@@ -189,10 +201,16 @@ function reiniciar(){
     btnreiniciar.style.display = 'none'
     document.getElementById('resultado').innerText = ''
 
-    podeAumentar = true
-    podeFicar = true
+    podeAumentar = false
+    podeFicar = false
     podeApostar = true
     rangeAposta.disabled = false
+
+    rangeAposta.value = 1
+
+    document.getElementById('ficar').disabled = true
+    document.getElementById('aumentar').disabled = true
+    document.getElementById('apostar').disabled = false
 
     while (cartasdealer.children.length > 1) {
         cartasdealer.removeChild(cartasdealer.lastChild);
@@ -274,7 +292,13 @@ function apostar(){
     } else{
         rangeAposta.style.display = 'none'
         valorAposta.style.display = 'none'
+        podeFicar = true
+        document.getElementById('ficar').disabled = false
+        podeAumentar = true
+        document.getElementById('aumentar').disabled = false
+        document.getElementById('apostar').disabled = true
     }
+    
 }
 
 function aparecerloja(){
@@ -320,6 +344,29 @@ function comprar(itemCompra){
             document.getElementById('fichas').innerText = pontos
             corbotao = true
             document.getElementById('compracorbotao').disabled = true
+        }
+    }
+
+    if (itemCompra === 'premio'){
+        if (pontos < 100000){
+            alert('pontos insuficientes')
+        } else{
+            pontos -= 100000
+            document.getElementById('fichas').innerText = pontos
+            premio = true
+            document.getElementById('comprapremio').disabled = true
+            alert('Meus parabéns! Você venceu o Dealer!!!')
+        }
+    }
+
+    if (itemCompra === 'vida'){
+        if (pontos < 1500){
+            alert('pontos insuficientes')
+        } else{
+            pontos -= 1500
+            document.getElementById('fichas').innerText = pontos
+            vida = true
+            document.getElementById('compravida').disabled = true
         }
     }
 
