@@ -19,8 +19,14 @@ var valorAposta = document.getElementById('valoraposta')
 valorAposta.innerText = rangeAposta.value
 rangeAposta.max = pontos
 
+var telaLoja = document.getElementById('telaloja')
+var telaInventario = document.getElementById('telainventario')
+
 var hidden
 var deck
+
+var corfundo = false
+var corbotao = false
 
 var podeAumentar = true
 var podeFicar = true
@@ -166,6 +172,11 @@ function ficar(){
         rangeAposta.value = 1
     }
 
+    if (pontos <= 0){
+        alert('Derrota')
+        window.location.reload();
+    }
+
     document.getElementById('mao-dealer').innerText = maoDealer
     document.getElementById('mao-jogador').innerText = maoJogador
     document.getElementById('resultado').innerText = mensagem
@@ -264,4 +275,75 @@ function apostar(){
         rangeAposta.style.display = 'none'
         valorAposta.style.display = 'none'
     }
+}
+
+function aparecerloja(){
+    if (telaLoja.style.display === 'block'){
+        telaLoja.style.display = 'none'
+    } else{
+        telaLoja.style.display = 'block'
+    }
+}
+
+function aparecerinventario(){
+    if (telaInventario.style.display === 'block'){
+        telaInventario.style.display = 'none'
+    } else{
+        telaInventario.style.display = 'block'
+        if (corfundo){
+            document.getElementById('itemcorfundo').style.display = 'block'
+        }
+        if (corbotao){
+            document.getElementById('itemcorbotao').style.display = 'block'
+        }
+    }
+    console.log(corbotao)
+}
+
+function comprar(itemCompra){
+    if (itemCompra === 'corfundo'){
+        if (pontos < 200){
+            alert('pontos insuficientes')
+        } else{
+            pontos -= 200
+            document.getElementById('fichas').innerText = pontos
+            corfundo = true
+            document.getElementById('compracorfundo').disabled = true
+        }
+    }
+
+    if (itemCompra === 'corbotao'){
+        if (pontos < 150){
+            alert('pontos insuficientes')
+        } else{
+            pontos -= 150
+            document.getElementById('fichas').innerText = pontos
+            corbotao = true
+            document.getElementById('compracorbotao').disabled = true
+        }
+    }
+
+}
+
+function mudarCorFundo(){
+    var rangecorfundo = document.getElementById("rangecorfundo");
+    var valorcorfundo = rangecorfundo.value;
+    var corfundo = "rgb(" + valorcorfundo + ", " + (255 - valorcorfundo) + ", 100)";
+    
+    document.getElementById("body").style.backgroundColor = corfundo
+
+}
+
+function mudarCorBotao(){
+    var rangecorbotao = document.getElementById("rangecorbotao");
+    var valorcorbotao = rangecorbotao.value;
+    var corbtn = "rgb(" + valorcorbotao + ", " + (255 - valorcorbotao) + ", 100)";
+    
+    document.getElementById("loja").style.backgroundColor = corbtn
+    document.getElementById("itens").style.backgroundColor = corbtn
+    document.getElementById('aumentar').style.backgroundColor = corbtn
+    document.getElementById('ficar').style.backgroundColor = corbtn
+    document.getElementById('apostar').style.backgroundColor = corbtn
+    document.getElementById('reiniciar').style.backgroundColor = corbtn
+
 }

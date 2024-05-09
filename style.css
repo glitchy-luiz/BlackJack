@@ -54,6 +54,83 @@ p{
     text-align: left;
 }
 
+#loja{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+}
+
+.loja{
+    display: none;
+    width: 80%;
+    height: 80%;
+    background-color:darkgray;
+    border: 10px;
+    z-index: 1000;
+    position: absolute;
+    margin-left: 9%;
+    justify-content: center;
+}
+
+.itemcompra{
+    max-width: 250px;
+    /* display: block; */
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color:cadetblue;
+    margin: 20px;
+    padding: 10px;
+}
+
+.itenscompra{
+    display: flex;
+}
+
+.compra{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}
+
+#itens{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 90%;
+}
+
+.inventario{
+    display: none;
+    width: 80%;
+    height: 80%;
+    background-color:rgb(190, 107, 132);
+    border: 10px;
+    z-index: 1000;
+    position: absolute;
+    margin-left: 9%;
+    justify-content: center;
+}
+
+.item{
+    max-width: 250px;
+    display: none;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    background-color:cadetblue;
+    margin: 20px;
+    padding: 10px;
+}
+
 /* #rangeaposta{
     display: flex;
     flex-direction: column;

@@ -3,11 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/cartas/BACK.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <title>BlackJack</title>
 </head>
-<body>
+<body id="body">
     <h2 class="fichas">Fichas: <span id="fichas"></span></h2>
+    <button id="loja" onclick="aparecerloja()">Loja</button>
+
+    <button id="itens" onclick="aparecerinventario()">Itens</button>
+
+    <div class="loja" id="telaloja">
+        <h1>Bem vindo a loja</h1>
+        <div class="itenscompra">
+            <div class="itemcompra">
+                <h2>Novas cores de fundo</h2>
+                <button class="compra" id="compracorfundo" onclick="comprar('corfundo')">Comprar</button>
+                <p>200 pontos</p>
+            </div>
+            <div class="itemcompra">
+                <h2>Novas cores de botões</h2>
+                <button class="compra" id="compracorbotao" onclick="comprar('corbotao')">Comprar</button>
+                <p>150 pontos</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="inventario" id="telainventario">
+        <h1>Bem vindo ao seu inventário</h1>
+        <div class="item" id="itemcorfundo">
+            <h2>Alterar cor do fundo:</h2>
+            <input type="range" id="rangecorfundo" min="0" max="255" value="0" oninput="mudarCorFundo()">
+        </div>
+        <div class="item" id="itemcorbotao">
+            <h2>Alterar cor dos botões:</h2>
+            <input type="range" id="rangecorbotao" min="0" max="255" value="0" oninput="mudarCorBotao()">
+        </div>
+    </div>
 
     <h2>Dealer: <span id="mao-dealer"></span></h2>
     <div id="cartas-dealer">
