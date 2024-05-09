@@ -37,6 +37,13 @@
                 <p>1500 pontos</p>
             </div>
         </div>
+        <div class="itenscompra">
+            <div class="itemcompra">
+                <h2>Ponto extra</h2>
+                <button class="compra" id="compraextra" onclick="comprar('extra')">Comprar</button>
+                <p>600 pontos</p>
+            </div>
+        </div>
     </div>
 
     <div class="inventario" id="telainventario">
@@ -48,6 +55,11 @@
         <div class="item" id="itemcorbotao">
             <h2>Alterar cor dos botões:</h2>
             <input type="range" id="rangecorbotao" min="0" max="255" value="0" oninput="mudarCorBotao()">
+        </div>
+        <div class="item" id="itempontoextra">
+            <h2>Adiciona 1 a sua mão atual:</h2>
+            <p id="numeroextra"></p>
+            <button id="usarpontoextra" onclick="usarExtra()">Usar</button>
         </div>
     </div>
 

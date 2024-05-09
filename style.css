@@ -74,6 +74,7 @@ p{
     position: absolute;
     margin-left: 9%;
     justify-content: center;
+    overflow-y: auto;
 }
 
 .itemcompra{
@@ -131,10 +132,8 @@ p{
     padding: 10px;
 }
 
-/* #rangeaposta{
-    display: flex;
-    flex-direction: column;
-    margin-left: 45%;
-    margin-top: 8px;
-    display: none;
-} */
+#usarpontoextra{
+    width: 100px;
+    height: 50px;
+    font-size: 20px;
+}

@@ -1,6 +1,6 @@
 // lembrete: As imagems estão em inglês, portanto os naipes são. C = Paus, D = Ouros, H = Copas, S = Espadas
 
-var pontos = 100;
+var pontos = 10000;
 document.getElementById('fichas').innerText = pontos
 
 var btnreiniciar =  document.getElementById('reiniciar')
@@ -29,6 +29,10 @@ var corfundo = false
 var corbotao = false
 var premio = false
 var vida = false
+var extra = false
+
+var pontoextras = 0
+var addumponto = 0
 
 document.getElementById('ficar').disabled = true
 document.getElementById('aumentar').disabled = true
@@ -136,7 +140,7 @@ function ficar(){
         return;
     }
     maoDealer = reduceAce(maoDealer, DealerAceCount)
-    maoJogador = reduceAce(maoJogador, JogadorAceCount)
+    maoJogador = reduceAce(maoJogador, JogadorAceCount) + addumponto
 
     btnreiniciar.style.display = 'inline'
 
@@ -206,11 +210,14 @@ function reiniciar(){
     podeApostar = true
     rangeAposta.disabled = false
 
+    addumponto = 0
+
     rangeAposta.value = 1
 
     document.getElementById('ficar').disabled = true
     document.getElementById('aumentar').disabled = true
     document.getElementById('apostar').disabled = false
+    document.getElementById('usarpontoextra').disabled = false
 
     while (cartasdealer.children.length > 1) {
         cartasdealer.removeChild(cartasdealer.lastChild);
@@ -320,8 +327,10 @@ function aparecerinventario(){
         if (corbotao){
             document.getElementById('itemcorbotao').style.display = 'block'
         }
+        if (extra){
+            document.getElementById('itempontoextra').style.display = 'block'
+        }
     }
-    console.log(corbotao)
 }
 
 function comprar(itemCompra){
@@ -370,6 +379,18 @@ function comprar(itemCompra){
         }
     }
 
+    if (itemCompra === 'extra'){
+        if (pontos < 600){
+            alert('pontos insuficientes')
+        } else{
+            pontos -= 600
+            document.getElementById('fichas').innerText = pontos
+            extra = true
+            pontoextras += 1
+            document.getElementById('numeroextra').innerText = pontoextras
+        }
+    }
+
 }
 
 function mudarCorFundo(){
@@ -392,5 +413,16 @@ function mudarCorBotao(){
     document.getElementById('ficar').style.backgroundColor = corbtn
     document.getElementById('apostar').style.backgroundColor = corbtn
     document.getElementById('reiniciar').style.backgroundColor = corbtn
+    document.getElementById('usarpontoextra').style.backgroundColor = corbtn
 
+}
+
+function usarExtra(){
+    pontoextras -= 1
+    document.getElementById('numeroextra').innerText = pontoextras
+    addumponto = 1
+    document.getElementById('usarpontoextra').disabled = true
+    if(pontoextras <= 0){
+        document.getElementById('itempontoextra').style.display = 'none'
+    }
 }
